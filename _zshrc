@@ -1,0 +1,78 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+bindkey -e
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+#alias
+alias zshrc='vim ~/.zshrc'
+alias zshrcs='source ~/.zshrc'
+alias c="powered_cd"
+alias repo="hub browse"
+
+# Customize to your needs...
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+export GOPATH=$HOME/.go
+export PATH=$GOPATH/bin:$PATH
+export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fbr - checkout git branch (including remote branches)
+fbr() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+function chpwd() {
+  powered_cd_add_log
+}
+
+function powered_cd_add_log() {
+  local i=0
+  cat ~/.powered_cd.log | while read line; do
+    (( i++ ))
+    if [ i = 30 ]; then
+      sed -i -e "30,30d" ~/.powered_cd.log
+    elif [ "$line" = "$PWD" ]; then
+      sed -i -e "${i},${i}d" ~/.powered_cd.log
+    fi
+  done
+  echo "$PWD" >> ~/.powered_cd.log
+}
+
+function powered_cd() {
+  if [ $# = 0 ]; then
+    cd $(gtac ~/.powered_cd.log | fzf)
+  elif [ $# = 1 ]; then
+    cd $1
+  else
+    echo "powered_cd: too many arguments"
+  fi
+}
+
+_powered_cd() {
+  _files -/
+}
+
+compdef _powered_cd powered_cd
+
+[ -e ~/.powered_cd.log ] || touch ~/.powered_cd.log
+
+FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"

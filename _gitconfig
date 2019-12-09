@@ -1,0 +1,8 @@
+[user]
+	name = tuiboku1128
+	email = tuiboku1128@gmail.com
+[core]
+	editor = emacs
+	excludesfile = /Users/tuiboku/.gitignore_global
+[pull]
+	default = current
