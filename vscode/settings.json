@@ -1,0 +1,17 @@
+{
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.runInTerminal": true,
+    "code-runner.saveAllFilesBeforeRun": true,
+    "window.zoomLevel": -1,
+    "files.autoSave": "onWindowChange",
+    "editor.cursorStyle": "block",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.fontSize": 16,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "go.formatTool": "goimports",
+    "workbench.editor.enablePreview": false,
+    "liveServer.settings.donotShowInfoMsg": true
+}
