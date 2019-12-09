@@ -25,14 +25,12 @@ export PATH=$GOPATH/bin:$PATH
 export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# fbr - checkout git branch (including remote branches)
-fbr() {
-  local branches branch
-  branches=$(git branch --all | grep -v HEAD) &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+
+fbr(){
+  git checkout $(git branch -a | tr -d " " |fzf --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | head -n 1 | sed -e "s/^\*\s*//g" | perl -pe "s/remotes\/origin\///g")
 }
+
+alias fr='ghq look $(ghq list | fzf-tmux --reverse +m )'
 
 fd() {
   local dir
@@ -40,6 +38,7 @@ fd() {
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
+
 function chpwd() {
   powered_cd_add_log
 }
@@ -59,7 +58,7 @@ function powered_cd_add_log() {
 
 function powered_cd() {
   if [ $# = 0 ]; then
-    cd $(gtac ~/.powered_cd.log | fzf)
+    cd $(gtac ~/.powered_cd.log | fzf -m --preview "ls -la {}")
   elif [ $# = 1 ]; then
     cd $1
   else
@@ -76,3 +75,5 @@ compdef _powered_cd powered_cd
 [ -e ~/.powered_cd.log ] || touch ~/.powered_cd.log
 
 FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border --inline-info --preview 'bat  --color=always --style=header,grid --line-range :100 {}'"
+alias ls="exa"

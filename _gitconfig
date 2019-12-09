@@ -1,6 +1,10 @@
 [user]
 	name = tuiboku1128
 	email = tuiboku1128@gmail.com
+
+[ghq]
+	root = hoge
+
 [core]
 	editor = emacs
 	excludesfile = /Users/tuiboku/.gitignore_global
