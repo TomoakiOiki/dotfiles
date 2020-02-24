@@ -2,7 +2,7 @@
     "code-runner.clearPreviousOutput": true,
     "code-runner.runInTerminal": true,
     "code-runner.saveAllFilesBeforeRun": true,
-    "window.zoomLevel": -1,
+    "window.zoomLevel": 1,
     "files.autoSave": "onWindowChange",
     "editor.cursorStyle": "block",
     "editor.formatOnPaste": true,
@@ -13,5 +13,27 @@
     "explorer.confirmDelete": false,
     "go.formatTool": "goimports",
     "workbench.editor.enablePreview": false,
-    "liveServer.settings.donotShowInfoMsg": true
+    "liveServer.settings.donotShowInfoMsg": true,
+    "workbench.iconTheme": "vscode-icons",
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "git.autofetch": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "typescript.updateImportsOnFileMove.enabled": "always",
 }

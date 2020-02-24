@@ -10,3 +10,5 @@
 	excludesfile = /Users/tuiboku/.gitignore_global
 [pull]
 	default = current
+[alias]
+    p = !git push origin `git rev-parse --abbrev-ref HEAD`

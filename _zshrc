@@ -21,8 +21,10 @@ alias repo="hub browse"
 # Customize to your needs...
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export GOPATH=$HOME/.go
+export GOBIN=$GOPATH/bin
 export PATH=$GOPATH/bin:$PATH
 export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+export PATH=$PATH:`npm bin -g`
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -73,6 +75,10 @@ _powered_cd() {
 compdef _powered_cd powered_cd
 
 [ -e ~/.powered_cd.log ] || touch ~/.powered_cd.log
+
+autoload -U compinit
+compinit
+zstyle ':completion:*:default' menu select=1
 
 FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border --inline-info --preview 'bat  --color=always --style=header,grid --line-range :100 {}'"
