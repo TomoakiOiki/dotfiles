@@ -14,11 +14,11 @@ set hlsearch
 " 編集に関する設定:
 "
 " タブの画面上での幅
-set tabstop=4
+set tabstop=2
 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
-set softtabstop=4
+set softtabstop=2
 " 自動インデントでずれる幅
-set shiftwidth=4
+set shiftwidth=2
 " タブをスペースに展開する/ しない (expandtab:展開する)
 set expandtab
 " 自動的にインデントする (noautoindent:インデントしない)
@@ -33,6 +33,7 @@ set showmatch
 set wildmenu
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mM
+set cursorline " カーソルラインをハイライト
 
 "---------------------------------------------------------------------------
 " GUI固有ではない画面表示の設定:
@@ -59,8 +60,28 @@ set showcmd
 set showmode
 " タイトルを表示
 set title
-" 画面のカラースキーマCygwinでみやすい色使い
-colorscheme torte
+
+colorscheme default
+set list
+set listchars=tab:»-,trail:_,eol:↲,extends:»,precedes:«,nbsp:%
+" ファイル名表示
+set statusline=%F
+" 変更チェック表示
+set statusline+=%m
+" 読み込み専用かどうか表示
+set statusline+=%r
+" ヘルプページなら[HELP]と表示
+set statusline+=%h
+" プレビューウインドウなら[Prevew]と表示
+set statusline+=%w
+" これ以降は右寄せ表示
+set statusline+=%=
+" file encoding
+set statusline+=[ENC=%{&fileencoding}]
+" 現在行数/全行数
+set statusline+=[LOW=%l/%L]
+" ステータスラインを常に表示(0:表示しない、1:2つ以上ウィンドウがある時だけ表示)
+set laststatus=2
 
 "---------------------------------------------------------------------------
 " ファイル操作に関する設定:
@@ -72,4 +93,25 @@ set noswapfile
 " シンタックスハイライト
 syntax on
 
-inoremap <silent> jj <ESC>
+inoremap jj <ESC>
+inoremap { {}<LEFT>
+inoremap [ []<LEFT>
+inoremap ( ()<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+if has('mouse')
+    set mouse=a
+    if has('mouse_sgr')
+        set ttymouse=sgr
+    elseif v:version > 703 || v:version is 703 && has('patch632')
+        set ttymouse=sgr
+    else
+        set ttymouse=xterm2
+    endif
+endif
+set completeopt=menuone,noinsert
+
+" 補完表示時のEnterで改行をしない
+inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
+inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
+inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"

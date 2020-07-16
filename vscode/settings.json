@@ -1,39 +1,35 @@
 {
-    "code-runner.clearPreviousOutput": true,
-    "code-runner.runInTerminal": true,
-    "code-runner.saveAllFilesBeforeRun": true,
-    "window.zoomLevel": 1,
-    "files.autoSave": "onWindowChange",
-    "editor.cursorStyle": "block",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnType": true,
-    "editor.fontSize": 16,
-    "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
-    "go.formatTool": "goimports",
-    "workbench.editor.enablePreview": false,
-    "liveServer.settings.donotShowInfoMsg": true,
-    "workbench.iconTheme": "vscode-icons",
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "git.autofetch": true,
-    "vsicons.dontShowNewVersionMessage": true,
-    "vim.insertModeKeyBindings": [
-        {
-            "before": [
-                "j",
-                "j"
-            ],
-            "after": [
-                "<Esc>"
-            ]
-        }
-    ],
-    "typescript.updateImportsOnFileMove.enabled": "always",
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.runInTerminal": true,
+  "code-runner.saveAllFilesBeforeRun": true,
+  "window.zoomLevel": 0,
+  "files.autoSave": "onWindowChange",
+  "editor.cursorStyle": "block",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.fontSize": 16,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "go.formatTool": "goimports",
+  "workbench.editor.enablePreview": false,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "workbench.iconTheme": "vscode-icons",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.autofetch": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "vim.vimrc.enable": true,
+  "vim.vimrc.path": "/Users/toiki/.vimrc",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "runner.languageMap": {
+    "cpp": "/Users/toiki/vsc_run/cpp.sh"
+  },
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }
