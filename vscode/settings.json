@@ -2,7 +2,6 @@
   "code-runner.clearPreviousOutput": true,
   "code-runner.runInTerminal": true,
   "code-runner.saveAllFilesBeforeRun": true,
-  "window.zoomLevel": 0,
   "files.autoSave": "onWindowChange",
   "editor.cursorStyle": "block",
   "editor.formatOnPaste": true,
@@ -31,5 +30,30 @@
     "cpp": "/Users/toiki/vsc_run/cpp.sh"
   },
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "editor.largeFileOptimizations": false,
+  "eslint.format.enable": true,
+  "prettier.disableLanguages": [
+    "yaml"
+  ],
+  "explorer.compactFolders": false,
+  "editor.minimap.enabled": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "mssql.connections": [
+    {
+      "server": "{{put-server-name-here}}",
+      "database": "{{put-database-name-here}}",
+      "user": "{{put-username-here}}",
+      "password": "{{put-password-here}}"
+    }
+  ],
+  "prettier.printWidth": 160,
+  "go.toolsManagement.autoUpdate": true,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter.notebook.ipynb"
+  },
+  "files.insertFinalNewline": true,
+  "window.zoomLevel": -1
 }
