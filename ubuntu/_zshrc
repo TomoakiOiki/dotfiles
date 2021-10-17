@@ -1,0 +1,142 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#alias
+alias zshrc='vim ~/.zshrc'
+alias zshrcs='source ~/.zshrc'
+alias c="powered_cd"
+alias repo="hub browse"
+alias ls="exa"
+alias awsp="source _awsp"
+function awswp(){
+    unset AWS_ACCESS_KEY_ID
+    unset AWS_SECRET_ACCESS_KEY_ID
+    unset AWS_SESSION_TOKEN
+    aws_credentials=$(aws sts assume-role --role-arn "arn:aws:iam::${1}:role/admin" --role-session-name "assume_role")
+    export AWS_ACCESS_KEY_ID=$(echo $aws_credentials|jq '.Credentials.AccessKeyId'|tr -d '"')
+    export AWS_SECRET_ACCESS_KEY=$(echo $aws_credentials|jq '.Credentials.SecretAccessKey'|tr -d '"')
+    export AWS_SESSION_TOKEN=$(echo $aws_credentials|jq '.Credentials.SessionToken'|tr -d '"')
+}
+
+export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border --inline-info --preview 'bat  --color=always --style=header,grid --line-range :100 {}'"
+
+fbr(){
+  git checkout $(git branch -a | tr -d " " |fzf --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | head -n 1 | sed -e "s/^\*\s*//g" | perl -pe "s/remotes\/origin\///g")
+}
+
+alias fr='ghq get --look $(ghq list | fzf --reverse +m --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/(README|readme).*" )'
+
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+function chpwd() {
+  powered_cd_add_log
+}
+
+function powered_cd_add_log() {
+  local i=0
+  cat ~/.powered_cd.log | while read line; do
+    (( i++ ))
+    if [ i = 30 ]; then
+      sed -i -e "30,30d" ~/.powered_cd.log
+    elif [ "$line" = "$PWD" ]; then
+      sed -i -e "${i},${i}d" ~/.powered_cd.log
+    fi
+  done
+  echo "$PWD" >> ~/.powered_cd.log
+}
+
+function powered_cd() {
+  if [ $# = 0 ]; then
+    cd $(gtac ~/.powered_cd.log | fzf -m --preview "ls -la {}")
+  elif [ $# = 1 ]; then
+    cd $1
+  else
+    echo "powered_cd: too many arguments"
+  fi
+}
+
+_powered_cd() {
+  _files -/
+}
+
+compdef _powered_cd powered_cd
+
+[ -e ~/.powered_cd.log ] || touch ~/.powered_cd.log
+
+autoload -U compinit
+compinit
+zstyle ':completion:*:default' menu select=1
+
+# git ブランチ名を色付きで表示させるメソッド
+function rprompt-git-current-branch {
+  local branch_name st branch_status
+
+  branch_name=`git rev-parse --abbrev-ref HEAD 2> /dev/null`
+  st=`git status 2> /dev/null`
+  if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
+    # 全て commit されてクリーンな状態
+    branch_status="%F{green}"
+  elif [[ -n `echo "$st" | grep "^Untracked files"` ]]; then
+    # git 管理されていないファイルがある状態
+    branch_status="%F{red}?"
+  elif [[ -n `echo "$st" | grep "^Changes not staged for commit"` ]]; then
+    # git add されていないファイルがある状態
+    branch_status="%F{red}+"
+  elif [[ -n `echo "$st" | grep "^Changes to be committed"` ]]; then
+    # git commit されていないファイルがある状態
+    branch_status="%F{yellow}!"
+  elif [[ -n `echo "$st" | grep "^rebase in progress"` ]]; then
+    # コンフリクトが起こった状態
+    echo "%F{red}!(no branch)"
+    return
+  else
+    # 上記以外の状態の場合
+    branch_status="%F{blue}"
+  fi
+  # ブランチ名を色付きで表示する
+  echo "${branch_status}[$branch_name]"
+}
+
+# プロンプトが表示されるたびにプロンプト文字列を評価、置換する
+setopt prompt_subst
+
+# プロンプトの右側にメソッドの結果を表示させる
+RPROMPT='`rprompt-git-current-branch`'
+
+### open specific repo page
+function grepo(){
+  local repo
+  repo=$(gh repos $(echo "$1") | fzf --layout=reverse --height 100% --prompt "repositories>")
+  gh repo view $(repo) --web
+  zle accept-line
+}
+
+### open PR page of current branchgh
+alias pr="gh pr view --web"
+
+### open PR page of specific PR num
+function gpr(){
+  local pr=$(gh pr list |fzf --layout=reverse --height 100% --prompt "Pull Requests>")
+  local prnum=$(echo $pr | awk '{print $1}')
+  gh pr view $(echo $prnum) --web
+}
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
