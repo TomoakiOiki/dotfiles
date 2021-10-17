@@ -1,0 +1,30 @@
+# bat
+sudo apt update
+sudo apt install bat
+
+# exa
+wget http://archive.ubuntu.com/ubuntu/pool/universe/r/rust-exa/exa_0.9.0-4_amd64.deb
+sudo apt-get install ./exa_0.9.0-4_amd64.deb
+
+# ghq
+sudo apt-get install golang
+go get github.com/motemen/ghq
+
+# hub
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:cpick/hub
+sudo apt-get update
+sudo apt-get install hub
+
+# tig
+sudo apt install tig
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
+# anyenv
+git clone https://github.com/anyenv/anyenv ~/.anyenv
+echo 'export PATH="$HOME/.anyenv/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(anyenv init -)"' >> ~/.zshrc
+source ~/.zshrc
+anyenv --version
+anyenv install --init

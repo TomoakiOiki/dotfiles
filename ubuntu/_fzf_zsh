@@ -1,0 +1,13 @@
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == */home/toiki/.fzf/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}/home/toiki/.fzf/bin"
+fi
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "/home/toiki/.fzf/shell/completion.zsh" 2> /dev/null
+
+# Key bindings
+# ------------
+source "/home/toiki/.fzf/shell/key-bindings.zsh"

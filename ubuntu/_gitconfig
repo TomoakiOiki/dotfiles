@@ -1,0 +1,20 @@
+[user]
+	name = toiki
+	email = oiki_tomoaki@avilen.co.jp
+
+[ghq]
+	root = ~/src
+	root = ~/ghq
+    root = ~/go/src
+
+[core]
+	editor = vim
+	excludesfile = /Users/tuiboku/.gitignore_global
+
+[pull]
+	default = current
+
+[alias]
+    p = !git push origin `git rev-parse --abbrev-ref HEAD`
+    fp = !git push --force-with-lease origin `git rev-parse --abbrev-ref HEAD`
+
