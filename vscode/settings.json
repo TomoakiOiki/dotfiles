@@ -33,9 +33,7 @@
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "editor.largeFileOptimizations": false,
   "eslint.format.enable": true,
-  "prettier.disableLanguages": [
-    "yaml"
-  ],
+  "prettier.disableLanguages": ["yaml"],
   "explorer.compactFolders": false,
   "editor.minimap.enabled": true,
   "[typescriptreact]": {
@@ -46,7 +44,7 @@
       "server": "{{put-server-name-here}}",
       "database": "{{put-database-name-here}}",
       "user": "{{put-username-here}}",
-      "password": "{{put-password-here}}"
+      "password": ""
     }
   ],
   "prettier.printWidth": 160,
@@ -55,5 +53,29 @@
     "*.ipynb": "jupyter.notebook.ipynb"
   },
   "files.insertFinalNewline": true,
-  "window.zoomLevel": -1
+  "editor.inlineSuggest.enabled": true,
+  "bracketPairColorizer.depreciation-notice": false,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": true,
+    "markdown": false,
+    "rust": true
+  },
+  "files.associations": {
+    "*.toml": "toml"
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust"
+  },
+  "files.watcherExclude": {
+    "**/__generated__/**": true,
+    "**/build/**": true,
+    "**/coverage/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true
+  },
+  "redhat.telemetry.enabled": true,
+  "terminal.integrated.enableMultiLinePasteWarning": false
 }

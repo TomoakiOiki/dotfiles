@@ -36,7 +36,7 @@ export GOPATH=$HOME/.go
 export GOBIN=$GOPATH/bin
 export PATH=$GOPATH/bin:$PATH
 export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
-export PATH=$PATH:`npm bin -g`
+# export PATH=$PATH:`npm bin -g`
 export PATH=$PATH:/Users/toiki/Library/Python/3.7/bin
 export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border --inline-info --preview 'bat  --color=always --style=header,grid --line-range :100 {}'"
 export PYENV_ROOT="$HOME/.pyenv"
@@ -128,8 +128,12 @@ function rprompt-git-current-branch {
 # プロンプトが表示されるたびにプロンプト文字列を評価、置換する
 setopt prompt_subst
 
-# プロンプトの右側にメソッドの結果を表示させる
+# プロンプトの右側にgitのブランチを表示する
 RPROMPT='`rprompt-git-current-branch`'
+
+# PROMPT
+PROMPT="%B%F{red}>%F{green}>%F{blue} %~%b
+%F{white}%B$ %F{white}% "
 
 FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 export PYENV_ROOT="$HOME/.pyenv"
@@ -165,3 +169,7 @@ function gpr(){
   gh pr view $(echo $prnum) --web
 }
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+function git_prompt_info() {
+    ref=$(git-branch-name -q -h 12 -b 64) || return
+    echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}${ZSH_THEME_GIT_PROMPT_CLEAN}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+}

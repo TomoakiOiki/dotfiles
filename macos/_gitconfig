@@ -1,15 +1,16 @@
 [user]
-	name = avilen-toiki
-	email = oiki_tomoaki@avilen.co.jp
+	name =  toiki
+	email = tuiboku1128@gmail.com
 
 [ghq]
 	root = ~/src
 
 [core]
 	editor = vim
-	excludesfile = /Users/tuiboku/.gitignore_global
+	excludesfile = /Users/toiki/.gitignore_global
 [pull]
 	default = current
+	ff = only
 [alias]
     p = !git push origin `git rev-parse --abbrev-ref HEAD`
     fp = !git push --force-with-lease origin `git rev-parse --abbrev-ref HEAD`
