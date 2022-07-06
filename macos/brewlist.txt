@@ -1,7 +1,0 @@
-bat
-coreutils
-emacs
-exa
-ghq
-hub
-tig

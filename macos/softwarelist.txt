@@ -1,8 +1,0 @@
-google日本語入力
-vscode
-slack
-line
-docker
-iterm2
-mysqlworkbench
-clipy
