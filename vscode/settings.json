@@ -66,7 +66,7 @@
     "*.toml": "toml"
   },
   "[rust]": {
-    "editor.defaultFormatter": "rust-lang.rust"
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
   },
   "files.watcherExclude": {
     "**/__generated__/**": true,
@@ -77,5 +77,8 @@
     "**/node_modules/**": true
   },
   "redhat.telemetry.enabled": true,
-  "terminal.integrated.enableMultiLinePasteWarning": false
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
