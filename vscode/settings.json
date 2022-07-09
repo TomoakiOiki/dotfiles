@@ -1,84 +1,90 @@
 {
-  "code-runner.clearPreviousOutput": true,
-  "code-runner.runInTerminal": true,
-  "code-runner.saveAllFilesBeforeRun": true,
-  "files.autoSave": "onWindowChange",
-  "editor.cursorStyle": "block",
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
   "editor.formatOnType": true,
+  "git.autofetch": true,
+  "prettier.printWidth": 160,
   "editor.fontSize": 16,
-  "explorer.confirmDragAndDrop": false,
-  "explorer.confirmDelete": false,
-  "go.formatTool": "goimports",
-  "workbench.editor.enablePreview": false,
-  "liveServer.settings.donotShowInfoMsg": true,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter.notebook.ipynb"
+  },
+  "code-runner.clearPreviousOutput": true,
+  "editor.accessibilitySupport": "off",
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "github.copilot.enable": {
+    "markdown": true,
+    "*": true,
+    "rust": true,
+    "plaintext": true,
+    "yaml": true
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.cursorStyle": "block",
+  "vim.vimrc.path": "/Users/toiki/.vimrc",
   "workbench.iconTheme": "vscode-icons",
+  "runner.languageMap": {
+    "cpp": "/Users/toiki/vsc_run/cpp.sh"
+  },
+  "mssql.connections": [
+    {
+      "user": "{{put-username-here}}",
+      "password": "",
+      "server": "{{put-server-name-here}}",
+      "database": "{{put-database-name-here}}"
+    }
+  ],
+  "liveServer.settings.donotShowInfoMsg": true,
+  "editor.largeFileOptimizations": false,
+  "prettier.disableLanguages": ["yaml"],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.autoSave": "onWindowChange",
+  "code-runner.runInTerminal": true,
+  "files.associations": {
+    "*.toml": "toml"
+  },
+  "editor.formatOnSave": true,
+  "window.zoomLevel": 1,
+  "bracketPairColorizer.depreciation-notice": false,
+  "vsicons.dontShowNewVersionMessage": true,
+  "files.insertFinalNewline": true,
+  "vim.vimrc.enable": true,
+  "explorer.confirmDragAndDrop": false,
+  "gitlens.codeLens.dateFormat": "",
+  "editor.suggestSelection": "first",
+  "editor.inlineSuggest.enabled": true,
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+  "redhat.telemetry.enabled": true,
+  "explorer.compactFolders": false,
+  "editor.formatOnPaste": true,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "go.formatTool": "goimports",
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "git.autofetch": true,
-  "vsicons.dontShowNewVersionMessage": true,
-  "vim.vimrc.enable": true,
-  "vim.vimrc.path": "/Users/toiki/.vimrc",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "runner.languageMap": {
-    "cpp": "/Users/toiki/vsc_run/cpp.sh"
-  },
-  "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "editor.largeFileOptimizations": false,
   "eslint.format.enable": true,
-  "prettier.disableLanguages": ["yaml"],
-  "explorer.compactFolders": false,
-  "editor.minimap.enabled": true,
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "mssql.connections": [
-    {
-      "server": "{{put-server-name-here}}",
-      "database": "{{put-database-name-here}}",
-      "user": "{{put-username-here}}",
-      "password": ""
-    }
-  ],
-  "prettier.printWidth": 160,
-  "go.toolsManagement.autoUpdate": true,
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter.notebook.ipynb"
-  },
-  "files.insertFinalNewline": true,
-  "editor.inlineSuggest.enabled": true,
-  "bracketPairColorizer.depreciation-notice": false,
-  "github.copilot.enable": {
-    "*": true,
-    "yaml": true,
-    "plaintext": true,
-    "markdown": false,
-    "rust": true
-  },
-  "files.associations": {
-    "*.toml": "toml"
-  },
-  "[rust]": {
-    "editor.defaultFormatter": "rust-lang.rust-analyzer"
-  },
+  "explorer.confirmDelete": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.editor.enablePreview": false,
   "files.watcherExclude": {
-    "**/__generated__/**": true,
-    "**/build/**": true,
     "**/coverage/**": true,
+    "**/node_modules/**": true,
     "**/.git/objects/**": true,
+    "**/__generated__/**": true,
     "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true
+    "**/build/**": true
   },
-  "redhat.telemetry.enabled": true,
-  "terminal.integrated.enableMultiLinePasteWarning": false,
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.minimap.enabled": true,
+  "code-runner.saveAllFilesBeforeRun": true,
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
   }
 }
