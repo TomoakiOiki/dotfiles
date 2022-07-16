@@ -1,18 +1,4 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 bindkey -e
-
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
 
 #alias
 alias zshrc='vim ~/.zshrc'
@@ -89,49 +75,54 @@ _powered_cd() {
   _files -/
 }
 
-compdef _powered_cd powered_cd
+power_cd=_powered_cd
 
 [ -e ~/.powered_cd.log ] || touch ~/.powered_cd.log
 
 autoload -U compinit
-compinit
 zstyle ':completion:*:default' menu select=1
 
 # git ブランチ名を色付きで表示させるメソッド
-function rprompt-git-current-branch {
-  local branch_name st branch_status
+# git statusが重たいリポジトリでQoLが下がるので使わない
+# function rprompt-git-current-branch {
+#   local branch_name st branch_status
 
-  branch_name=`git rev-parse --abbrev-ref HEAD 2> /dev/null`
-  st=`git status 2> /dev/null`
-  if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
-    # 全て commit されてクリーンな状態
-    branch_status="%F{green}"
-  elif [[ -n `echo "$st" | grep "^Untracked files"` ]]; then
-    # git 管理されていないファイルがある状態
-    branch_status="%F{red}?"
-  elif [[ -n `echo "$st" | grep "^Changes not staged for commit"` ]]; then
-    # git add されていないファイルがある状態
-    branch_status="%F{red}+"
-  elif [[ -n `echo "$st" | grep "^Changes to be committed"` ]]; then
-    # git commit されていないファイルがある状態
-    branch_status="%F{yellow}!"
-  elif [[ -n `echo "$st" | grep "^rebase in progress"` ]]; then
-    # コンフリクトが起こった状態
-    echo "%F{red}!(no branch)"
-    return
-  else
-    # 上記以外の状態の場合
-    branch_status="%F{blue}"
-  fi
-  # ブランチ名を色付きで表示する
-  echo "${branch_status}[$branch_name]"
+#   branch_name=`git rev-parse --abbrev-ref HEAD 2> /dev/null`
+#   st=`git status 2> /dev/null`
+#   if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
+#     # 全て commit されてクリーンな状態
+#     branch_status="%F{green}"
+#   elif [[ -n `echo "$st" | grep "^Untracked files"` ]]; then
+#     # git 管理されていないファイルがある状態
+#     branch_status="%F{red}?"
+#   elif [[ -n `echo "$st" | grep "^Changes not staged for commit"` ]]; then
+#     # git add されていないファイルがある状態
+#     branch_status="%F{red}+"
+#   elif [[ -n `echo "$st" | grep "^Changes to be committed"` ]]; then
+#     # git commit されていないファイルがある状態
+#     branch_status="%F{yellow}!"
+#   elif [[ -n `echo "$st" | grep "^rebase in progress"` ]]; then
+#     # コンフリクトが起こった状態
+#     echo "%F{red}!(no branch)"
+#     return
+#   else
+#     # 上記以外の状態の場合
+#     branch_status="%F{blue}"
+#   fi
+#   # ブランチ名を色付きで表示する
+#   echo "${branch_status}[$branch_name]"
+# }
+
+function git_prompt_info() {
+    ref=$(git-branch-name -q -h 12 -b 64) || return
+    echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}${ZSH_THEME_GIT_PROMPT_CLEAN}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
 
 # プロンプトが表示されるたびにプロンプト文字列を評価、置換する
 setopt prompt_subst
 
 # プロンプトの右側にgitのブランチを表示する
-RPROMPT='`rprompt-git-current-branch`'
+RPROMPT='[`git_prompt_info`]'
 
 # PROMPT
 PROMPT="%B%F{red}>%F{green}>%F{blue} %~%b
@@ -140,13 +131,14 @@ PROMPT="%B%F{red}>%F{green}>%F{blue} %~%b
 FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 
-eval "$(pyenv virtualenv-init -)"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+eval "$(pyenv init --path)"
+# eval "$(pyenv virtualenv-init -)"
+# export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
 alias tp='terraform plan'
 alias ta='terraform apply'
 alias repo='gh repo view --web' 
@@ -170,11 +162,8 @@ function gpr(){
   local prnum=$(echo $pr | awk '{print $1}')
   gh pr view $(echo $prnum) --web
 }
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-function git_prompt_info() {
-    ref=$(git-branch-name -q -h 12 -b 64) || return
-    echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}${ZSH_THEME_GIT_PROMPT_CLEAN}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
-}
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
+# profiling
+# if (which zprof > /dev/null 2>&1) ;then
+#   zprof
+# fi
