@@ -1,11 +1,11 @@
-ln -fs ./_vimrc ~/.vimrc
-ln -fs ./_zshrc ~/.zshrc
-ln -fs ./_zshenv ~/.zshenv
-ln -fs ./_npmrc ~/.npmrc
-ln -fs ./_gitconfig ~/.gitconfig
-ln -fs ./_fzf.zsh ~/.fzf.zsh
-ln -fs ./_yabairc ~/.yabairc
-ln -fs ./_skhdrc ~/.skhdrc
+ln -fs ~/dotfiles/macos/_vimrc ~/.vimrc
+ln -fs ~/dotfiles/macos/_zshrc ~/.zshrc
+ln -fs ~/dotfiles/macos/_zshenv ~/.zshenv
+ln -fs ~/dotfiles/macos/_npmrc ~/.npmrc
+ln -fs ~/dotfiles/macos/_gitconfig ~/.gitconfig
+ln -fs ~/dotfiles/macos/_fzf.zsh ~/.fzf.zsh
+ln -fs ~/dotfiles/macos/_yabairc ~/.yabairc
+ln -fs ~/dotfiles/macos/_skhdrc ~/.skhdrc
 
 cd ~/Library/Application\ Support/Code/User/
 rm settings.json

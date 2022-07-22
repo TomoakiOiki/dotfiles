@@ -1,11 +1,11 @@
 bindkey -e
 
-alias zshrc='vim ~/.zshrc'
-alias zshrcs='source ~/.zshrc'
-alias c="powered_cd"
-alias repo="hub browse"
-alias ls="exa"
-alias awsp="source _awsp"
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+
+# export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border --inline-info --preview 'bat  --color=always --style=header,grid --line-range :100 {}'"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 function awswp(){
   unset AWS_ACCESS_KEY_ID
   unset AWS_SECRET_ACCESS_KEY_ID
@@ -16,23 +16,34 @@ function awswp(){
   export AWS_SESSION_TOKEN=$(echo $aws_credentials|jq '.Credentials.SessionToken'|tr -d '"')
 }
 
+### open PR page of specific PR num
+function gpr(){
+  local pr=$(gh pr list |fzf --layout=reverse --height 100% --prompt "Pull Requests>")
+  local prnum=$(echo $pr | awk '{print $1}')
+  gh pr view $(echo $prnum) --web
+}
 
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-export GOPATH=$HOME/.go
-export GOBIN=$GOPATH/bin
-export PATH=$GOPATH/bin:$PATH
-export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
-export PATH=$PATH:/Users/toiki/Library/Python/3.7/bin
-export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border --inline-info --preview 'bat  --color=always --style=header,grid --line-range :100 {}'"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+function powered_cd() {
+  if [ $# = 0 ]; then
+    cd $(gtac ~/.powered_cd.log | fzf -m --height 50% --layout=reverse --preview "ls -la {}")
+  elif [ $# = 1 ]; then
+    cd $1
+  else
+    echo "powered_cd: too many arguments"
+  fi
+}
+
+[ -e ~/.powered_cd.log ] || touch ~/.powered_cd.log
+
+autoload -U compinit
+compinit
+zstyle ':completion:*:default' menu select=1
 
 eval "$(anyenv init -)"
 
 fbr(){
-  git checkout $(git branch -a | tr -d " " |fzf --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | head -n 1 | sed -e "s/^\*\s*//g" | perl -pe "s/remotes\/origin\///g")
+  git checkout $(git branch -a | tr -d " " |fzf --layout=reverse --height 50% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | head -n 1 | sed -e "s/^\*\s*//g" | perl -pe "s/remotes\/origin\///g")
 }
-
-alias fr='ghq get --look $(ghq list | fzf --reverse +m --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/(README|readme).*" )'
 
 fd() {
   local dir
@@ -58,30 +69,17 @@ function powered_cd_add_log() {
   echo "$PWD" >> ~/.powered_cd.log
 }
 
-function powered_cd() {
-  if [ $# = 0 ]; then
-    cd $(gtac ~/.powered_cd.log | fzf -m --preview "ls -la {}")
-  elif [ $# = 1 ]; then
-    cd $1
-  else
-    echo "powered_cd: too many arguments"
-  fi
-}
-
-_powered_cd() {
-  _files -/
-}
-
-power_cd=_powered_cd
-
-[ -e ~/.powered_cd.log ] || touch ~/.powered_cd.log
-
-autoload -U compinit
-zstyle ':completion:*:default' menu select=1
-
 function git_prompt_info() {
-  ref=$(git-branch-name -q -h 12 -b 64) || return
+  ref=$(git rev-parse --abbrev-ref HEAD) 2> /dev/null
   echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}${ZSH_THEME_GIT_PROMPT_CLEAN}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+}
+
+### open specific repo page
+function grepo(){
+  local repo
+  repo=$(gh repos $(echo "$1") | fzf --layout=reverse --height 100% --prompt "repositories>")
+  gh repo view $(repo) --web
+  zle accept-line
 }
 
 # プロンプトが表示されるたびにプロンプト文字列を評価、置換する
@@ -95,34 +93,18 @@ PROMPT="%B%F{red}>%F{green}>%F{blue} %~%b
 %F{white}%B$ %F{white}% "
 
 FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-export PATH="$HOME/.poetry/bin:$PATH"
 
 alias tp='terraform plan'
 alias ta='terraform apply'
 alias repo='gh repo view --web' 
-### open repo top page
-alias repo='gh repo view --web'
-
-### open specific repo page
-function grepo(){
-  local repo
-  repo=$(gh repos $(echo "$1") | fzf --layout=reverse --height 100% --prompt "repositories>")
-  gh repo view $(repo) --web
-  zle accept-line
-}
-
-### open PR page of current branchgh
 alias pr="gh pr view --web"
-
-### open PR page of specific PR num
-function gpr(){
-  local pr=$(gh pr list |fzf --layout=reverse --height 100% --prompt "Pull Requests>")
-  local prnum=$(echo $pr | awk '{print $1}')
-  gh pr view $(echo $prnum) --web
-}
+alias zshrc='vim ~/.zshrc'
+alias zshrcs='source ~/.zshrc'
+alias c="powered_cd"
+alias ls="exa"
+alias awsp="source _awsp"
+alias lzd="lazydocker" 
+alias fr='ghq get --look $(ghq list | fzf --layout=reverse --height 50% +m --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/(README|readme).*" )'
 
 # profiling
 # if (which zprof > /dev/null 2>&1) ;then

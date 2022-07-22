@@ -7,7 +7,7 @@
 
 [core]
 	editor = vim
-	excludesfile = /Users/toiki/.gitignore_global
+	excludesfile = /Users/tomoaki.oiki/.gitignore_global
 [pull]
 	default = current
 	ff = only
