@@ -1,87 +1,119 @@
 {
-  "vsicons.dontShowNewVersionMessage": true,
-  "github.copilot.enable": {
-    "yaml": true,
-    "*": true,
-    "rust": true,
-    "plaintext": true,
-    "markdown": true
-  },
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "prettier.printWidth": 160,
-  "explorer.compactFolders": false,
-  "code-runner.saveAllFilesBeforeRun": true,
-  "workbench.editor.enablePreview": false,
-  "[rust]": {
-    "editor.defaultFormatter": "rust-lang.rust-analyzer"
-  },
-  "bracketPairColorizer.depreciation-notice": false,
-  "mssql.connections": [
-    {
-      "password": "",
-      "database": "{{put-database-name-here}}",
-      "server": "{{put-server-name-here}}",
-      "user": "{{put-username-here}}"
-    }
-  ],
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter.notebook.ipynb"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "vim.vimrc.path": "/Users/tomoaki.oiki/.vimrc",
-  "files.insertFinalNewline": true,
-  "editor.inlineSuggest.enabled": true,
-  "editor.formatOnType": true,
-  "go.formatTool": "goimports",
-  "editor.largeFileOptimizations": false,
-  "liveServer.settings.donotShowInfoMsg": true,
-  "git.autofetch": true,
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "editor.accessibilitySupport": "off",
-  "redhat.telemetry.enabled": true,
-  "editor.cursorStyle": "block",
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "explorer.confirmDelete": false,
-  "prettier.disableLanguages": ["yaml"],
-  "workbench.iconTheme": "vscode-icons",
-  "explorer.confirmDragAndDrop": false,
-  "go.toolsManagement.autoUpdate": true,
-  "editor.formatOnSave": true,
-  "window.zoomLevel": 1,
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "files.autoSave": "onWindowChange",
+  "vim.vimrc.enable": true,
+  "gitlens.codeLens.dateFormat": "",
   "files.watcherExclude": {
-    "**/build/**": true,
+    "**/coverage/**": true,
     "**/node_modules/**": true,
     "**/.git/objects/**": true,
     "**/__generated__/**": true,
     "**/.git/subtree-cache/**": true,
-    "**/coverage/**": true
+    "**/build/**": true
   },
-  "editor.formatOnPaste": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "prettier.disableLanguages": ["yaml"],
+  "bracketPairColorizer.depreciation-notice": false,
+  "editor.formatOnSave": true,
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "gitlens.codeLens.dateFormat": "",
-  "[jsonc]": {
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "git.autofetch": true,
+  "files.associations": {
+    "*.toml": "toml"
+  },
+  "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.suggestSelection": "first",
+  "redhat.telemetry.enabled": true,
+  "prettier.printWidth": 160,
+  "mssql.connections": [
+    {
+      "password": "",
+      "user": "{{put-username-here}}",
+      "database": "{{put-database-name-here}}",
+      "server": "{{put-server-name-here}}"
+    }
+  ],
+  "code-runner.saveAllFilesBeforeRun": true,
+  "explorer.confirmDragAndDrop": false,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "explorer.confirmDelete": false,
+  "editor.fontSize": 16,
+  "workbench.editor.enablePreview": false,
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "terminal.integrated.env.osx": {
     "FIG_NEW_SESSION": "1"
   },
-  "editor.fontSize": 16,
-  "vim.vimrc.enable": true,
-  "editor.minimap.enabled": true,
-  "code-runner.runInTerminal": true,
+  "explorer.compactFolders": false,
   "terminal.integrated.enableMultiLinePasteWarning": false,
-  "code-runner.clearPreviousOutput": true,
+  "vim.vimrc.path": "/Users/tomoaki.oiki/.vimrc",
+  "files.insertFinalNewline": true,
+  "editor.formatOnPaste": true,
+  "editor.suggestSelection": "first",
   "eslint.format.enable": true,
-  "files.associations": {
-    "*.toml": "toml"
-  }
+  "editor.minimap.enabled": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "vsicons.dontShowNewVersionMessage": true,
+  "code-runner.runInTerminal": true,
+  "go.toolsManagement.autoUpdate": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "code-runner.clearPreviousOutput": true,
+  "workbench.iconTheme": "vscode-icons",
+  "editor.cursorStyle": "block",
+  "editor.accessibilitySupport": "off",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter.notebook.ipynb"
+  },
+  "editor.inlineSuggest.enabled": true,
+  "files.autoSave": "onWindowChange",
+  "github.copilot.enable": {
+    "markdown": true,
+    "*": true,
+    "rust": true,
+    "plaintext": true,
+    "yaml": true
+  },
+  "editor.formatOnType": true,
+  "editor.largeFileOptimizations": false,
+  "go.formatTool": "goimports",
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "auto-arrage-tabs.seconds": 3,
+  "svelte.enable-ts-plugin": true,
+  "cSpell.userWords": [
+    "Cascader",
+    "compositionend",
+    "compositionstart",
+    "fontawesome",
+    "fortawesome",
+    "fuga",
+    "hoge",
+    "Karte",
+    "nums",
+    "oiki",
+    "piyo",
+    "plaidev",
+    "reactflow",
+    "rightsupport",
+    "UNCATEGORIZED",
+    "upsert",
+    "ycenter"
+  ],
+  "update.showReleaseNotes": false,
+  "git.mergeEditor": false,
+  "textlint.autoFixOnSave": true,
+  "textlint.configPath": "/Users/tomoaki.oiki/src/github.com/plaidev/karte-io-systems/systems/issues/.textlintrc",
+  "svelte.plugin.svelte.note-new-transformation": true,
+  "git.openRepositoryInParentFolders": "always"
 }
